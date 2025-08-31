@@ -1,0 +1,136 @@
+.network-status {
+  background: #fff3cd;
+  border: 1px solid #ffeaa7;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.network-status-header h3 {
+  margin: 0 0 10px 0;
+  color: #856404;
+}
+
+.network-status-header p {
+  margin: 0 0 15px 0;
+  color: #856404;
+}
+
+.network-status-actions {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.retry-btn, .diagnostics-btn, .test-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.retry-btn {
+  background: #28a745;
+  color: white;
+}
+
+.retry-btn:hover {
+  background: #218838;
+}
+
+.diagnostics-btn {
+  background: #17a2b8;
+  color: white;
+}
+
+.diagnostics-btn:hover {
+  background: #138496;
+}
+
+.test-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.test-btn:hover:not(:disabled) {
+  background: #5a6268;
+}
+
+.test-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.network-diagnostics {
+  background: #f8f9fa;
+  border-radius: 4px;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.network-diagnostics h4 {
+  margin: 0 0 15px 0;
+  color: #495057;
+}
+
+.diagnostic-section {
+  margin-bottom: 15px;
+}
+
+.diagnostic-section h5 {
+  margin: 0 0 8px 0;
+  color: #495057;
+  font-size: 14px;
+}
+
+.diagnostic-section ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.diagnostic-section li {
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.diagnostic-section code {
+  background: #e9ecef;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.diagnostic-section.error {
+  background: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.diagnostic-section.error h5 {
+  color: #721c24;
+}
+
+.diagnostic-section.error p,
+.diagnostic-section.error li {
+  color: #721c24;
+}
+
+.diagnostic-section.recommendations {
+  background: #d1ecf1;
+  border: 1px solid #bee5eb;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.diagnostic-section.recommendations h5 {
+  color: #0c5460;
+}
+
+.diagnostic-section.recommendations li {
+  color: #0c5460;
+}

@@ -1,0 +1,144 @@
+.mode-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mode-toggle-container {
+  display: flex;
+  background: #f8f9fa;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  padding: 4px;
+  gap: 2px;
+}
+
+.mode-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #656d76;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  min-width: 80px;
+  justify-content: center;
+}
+
+.mode-button:hover:not(:disabled) {
+  background: #e1e5e9;
+  color: #24292f;
+}
+
+.mode-button.active {
+  background: #ffffff;
+  color: #0969da;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+}
+
+.mode-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.mode-icon {
+  font-size: 14px;
+}
+
+.mode-label {
+  font-size: 12px;
+}
+
+.mode-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #e6f3ff;
+  border: 1px solid #b6e3ff;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #0969da;
+}
+
+.info-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.info-text {
+  line-height: 1.3;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .mode-toggle {
+    width: 100%;
+  }
+  
+  .mode-toggle-container {
+    padding: 3px;
+    width: 100%;
+  }
+  
+  .mode-button {
+    padding: 8px 12px;
+    font-size: 12px;
+    min-width: 0;
+    flex: 1;
+    min-height: 44px; /* Touch-friendly height */
+  }
+  
+  .mode-icon {
+    font-size: 14px;
+  }
+  
+  .mode-label {
+    font-size: 12px;
+  }
+  
+  .mode-info {
+    padding: 6px 12px;
+    font-size: 11px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .mode-button {
+    padding: 6px 8px;
+    gap: 4px;
+  }
+  
+  .mode-label {
+    display: none; /* Hide labels on very small screens, keep icons only */
+  }
+  
+  .mode-info {
+    padding: 4px 8px;
+    font-size: 10px;
+  }
+  
+  .info-text {
+    display: none; /* Hide detailed info text on very small screens */
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .mode-button {
+    min-height: 48px;
+    padding: 12px 16px;
+  }
+  
+  .mode-button:active {
+    transform: scale(0.98);
+    transition: transform 0.1s ease;
+  }
+}

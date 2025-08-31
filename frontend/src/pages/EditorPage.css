@@ -1,0 +1,526 @@
+.editor-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #ffffff;
+  overflow-y: auto;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.editor-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  flex-shrink: 0;
+}
+
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.connection-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.connection-status.connected .status-indicator {
+  background-color: #28a745;
+}
+
+.connection-status.disconnected .status-indicator {
+  background-color: #dc3545;
+}
+
+.connection-status.checking .status-indicator {
+  background-color: #ffc107;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
+.status-text {
+  color: #495057;
+  font-weight: 500;
+}
+
+.connection-status.connected .status-text {
+  color: #28a745;
+}
+
+.connection-status.disconnected .status-text {
+  color: #dc3545;
+}
+
+.connection-status.checking .status-text {
+  color: #856404;
+}
+
+.retry-button {
+  background: none;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.retry-button:hover {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Language selector styles moved to LanguageSelector.css */
+
+.run-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.run-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.run-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.keyboard-shortcut {
+  font-size: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.2);
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+.editor-content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.code-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #e9ecef;
+  min-height: 0; /* Important for flex child to shrink */
+}
+
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-output-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  background-color: #f8f9fa;
+}
+
+.input-section {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e9ecef;
+  flex-shrink: 0;
+}
+
+.input-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.input-header h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #495057;
+  font-weight: 600;
+}
+
+.input-hint {
+  font-size: 0.8rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+.input-textarea {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  resize: vertical;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: #ffffff;
+  color: #495057;
+  outline: none;
+  min-height: 60px;
+  max-height: 120px;
+}
+
+.input-textarea::placeholder {
+  color: #adb5bd;
+  font-style: italic;
+}
+
+.input-textarea:focus {
+  background-color: #f8f9fa;
+}
+
+.output-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .editor-toolbar {
+    padding: 1rem;
+  }
+  
+  .toolbar-left {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .editor-page {
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .editor-toolbar {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    padding: 0.75rem;
+  }
+  
+  .toolbar-left {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: stretch;
+  }
+  
+  .connection-status {
+    justify-content: center;
+    order: -1; /* Move connection status to top */
+  }
+  
+  .run-button {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 1rem;
+  }
+  
+  .editor-content {
+    flex-direction: column;
+    height: calc(100vh - 200px); /* Account for toolbar height */
+  }
+  
+  .code-section {
+    border-right: none;
+    border-bottom: 1px solid #e9ecef;
+    height: 50vh;
+    min-height: 250px;
+    max-height: 60vh;
+  }
+  
+  .right-panel {
+    height: 50vh;
+    min-height: 250px;
+    max-height: 60vh;
+  }
+  
+  .input-output-section {
+    height: 100%;
+  }
+  
+  .preview-section {
+    padding: 0.5rem;
+    height: 100%;
+  }
+  
+  .input-section {
+    flex-shrink: 0;
+    max-height: 30%;
+  }
+  
+  .input-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .input-hint {
+    font-size: 0.75rem;
+  }
+  
+  .input-textarea {
+    padding: 0.5rem 1rem;
+    font-size: 13px;
+    min-height: 50px;
+    max-height: 80px;
+  }
+  
+  .output-section {
+    flex: 1;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .editor-toolbar {
+    padding: 0.5rem;
+  }
+  
+  .toolbar-left {
+    gap: 0.5rem;
+  }
+  
+  .run-button {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .keyboard-shortcut {
+    display: none; /* Hide keyboard shortcut on very small screens */
+  }
+  
+  .editor-content {
+    height: calc(100vh - 180px);
+  }
+  
+  .code-section {
+    min-height: 200px;
+  }
+  
+  .right-panel {
+    min-height: 200px;
+  }
+  
+  .input-header {
+    padding: 0.5rem;
+  }
+  
+  .input-textarea {
+    padding: 0.5rem;
+    font-size: 12px;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .run-button {
+    min-height: 48px; /* Minimum touch target size */
+    padding: 1rem 1.5rem;
+  }
+  
+  .retry-button {
+    min-height: 44px;
+    padding: 0.5rem 1rem;
+  }
+  
+  .connection-status {
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Increase touch targets for better mobile experience */
+  .language-select {
+    min-height: 48px;
+  }
+  
+  .input-textarea {
+    min-height: 60px;
+  }
+}
+
+/* Mobile input section */
+.mobile-input-section {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  padding: 0.5rem;
+}
+
+.mobile-input-section details {
+  margin: 0;
+}
+
+.mobile-input-section summary {
+  padding: 0.5rem;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #495057;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-input-section summary::-webkit-details-marker {
+  display: none;
+}
+
+.mobile-input-section summary::after {
+  content: '▼';
+  font-size: 0.7rem;
+  transition: transform 0.2s ease;
+}
+
+.mobile-input-section details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.mobile-input-section .input-textarea {
+  margin-top: 0.5rem;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}
+
+/* Responsive class modifiers */
+.editor-page.mobile {
+  --toolbar-height: 160px;
+}
+
+.editor-page.tablet {
+  --toolbar-height: 140px;
+}
+
+.editor-page.touch-device .run-button {
+  min-height: 48px;
+  padding: 1rem 1.5rem;
+}
+
+.editor-page.touch-device .retry-button {
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+}
+
+/* Orientation-specific layouts */
+.editor-content.landscape.mobile {
+  flex-direction: row;
+}
+
+.editor-content.landscape.mobile .code-section {
+  width: 50%;
+  border-right: 1px solid #e9ecef;
+  border-bottom: none;
+}
+
+.editor-content.landscape.mobile .right-panel {
+  width: 50%;
+}
+
+/* Landscape orientation on mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  .editor-content {
+    flex-direction: row;
+    height: calc(100vh - 120px);
+  }
+  
+  .code-section {
+    width: 50%;
+    height: 100%;
+    border-right: 1px solid #e9ecef;
+    border-bottom: none;
+  }
+  
+  .right-panel {
+    width: 50%;
+    height: 100%;
+  }
+  
+  .editor-toolbar {
+    flex-direction: row;
+    padding: 0.5rem;
+  }
+  
+  .toolbar-left {
+    flex-direction: row;
+    gap: 1rem;
+  }
+  
+  .connection-status {
+    order: 0;
+  }
+  
+  .mobile-input-section {
+    display: none; /* Hide mobile input in landscape */
+  }
+}
+
+/* Performance optimizations for mobile */
+@media (max-width: 768px) {
+  .editor-page {
+    will-change: transform;
+  }
+  
+  .code-section,
+  .right-panel {
+    will-change: transform;
+  }
+  
+  /* Reduce animations on mobile for better performance */
+  * {
+    transition-duration: 0.15s !important;
+  }
+}

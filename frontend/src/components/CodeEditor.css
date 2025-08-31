@@ -1,0 +1,291 @@
+.code-editor-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #1e1e1e;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.code-editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #2d2d30;
+  border-bottom: 1px solid #3e3e42;
+  flex-shrink: 0;
+}
+
+.editor-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.editor-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.settings-button {
+  background: none;
+  border: none;
+  color: #cccccc;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 3px;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.settings-button:hover {
+  background-color: #3e3e42;
+}
+
+.language-badge {
+  background-color: #007acc;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.editor-hint {
+  color: #cccccc;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.code-editor-wrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+
+.editor-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #1e1e1e;
+  color: #cccccc;
+}
+
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #3e3e42;
+  border-top: 3px solid #007acc;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.editor-loading p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Monaco Editor customizations */
+.monaco-editor {
+  background-color: #1e1e1e !important;
+}
+
+.monaco-editor .margin {
+  background-color: #1e1e1e !important;
+}
+
+.monaco-editor .monaco-editor-background {
+  background-color: #1e1e1e !important;
+}
+
+/* Settings Panel */
+.editor-settings-panel {
+  background-color: #252526;
+  border-bottom: 1px solid #3e3e42;
+  padding: 1rem;
+  max-height: 400px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.settings-header h3 {
+  margin: 0;
+  color: #cccccc;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.close-settings {
+  background: none;
+  border: none;
+  color: #cccccc;
+  cursor: pointer;
+  font-size: 1.5rem;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+}
+
+.close-settings:hover {
+  background-color: #3e3e42;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.setting-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.setting-group label {
+  color: #cccccc;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.setting-group select,
+.setting-group input[type="range"] {
+  background-color: #3c3c3c;
+  border: 1px solid #5a5a5a;
+  color: #cccccc;
+  padding: 0.4rem;
+  border-radius: 3px;
+  font-size: 0.85rem;
+}
+
+.setting-group select:focus,
+.setting-group input[type="range"]:focus {
+  outline: none;
+  border-color: #007acc;
+}
+
+.setting-group input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #007acc;
+}
+
+.setting-group span {
+  color: #cccccc;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+/* Keyboard Shortcuts */
+.keyboard-shortcuts {
+  border-top: 1px solid #3e3e42;
+  padding-top: 1rem;
+}
+
+.keyboard-shortcuts h4 {
+  margin: 0 0 1rem 0;
+  color: #cccccc;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.shortcuts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.5rem;
+}
+
+.shortcut-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0;
+}
+
+.shortcut-key {
+  background-color: #3c3c3c;
+  color: #cccccc;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-family: monospace;
+  border: 1px solid #5a5a5a;
+}
+
+.shortcut-desc {
+  color: #cccccc;
+  font-size: 0.8rem;
+  flex: 1;
+  text-align: right;
+  margin-left: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .code-editor-header {
+    padding: 0.5rem;
+  }
+  
+  .editor-info {
+    gap: 0.5rem;
+  }
+  
+  .language-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+  }
+  
+  .editor-hint {
+    display: none; /* Hide hint on mobile */
+  }
+
+  .editor-settings-panel {
+    padding: 0.75rem;
+    max-height: 300px;
+  }
+
+  .settings-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .shortcuts-list {
+    grid-template-columns: 1fr;
+  }
+
+  .shortcut-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  .shortcut-desc {
+    text-align: left;
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,247 @@
+.console-output {
+  background: #ffffff;
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.console-output.collapsed {
+  max-height: 48px;
+}
+
+.console-output.expanded {
+  max-height: 300px;
+}
+
+.console-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e1e5e9;
+  cursor: pointer;
+  user-select: none;
+  min-height: 48px;
+}
+
+.console-header:hover {
+  background: #f3f4f6;
+}
+
+.console-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #24292f;
+}
+
+.console-icon {
+  font-size: 16px;
+}
+
+.message-count {
+  font-size: 12px;
+  color: #656d76;
+  font-weight: normal;
+}
+
+.error-badge {
+  background: #d1242f;
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.warning-badge {
+  background: #fb8500;
+  color: #ffffff;
+  padding: 2px 6px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.console-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clear-button {
+  padding: 4px 8px;
+  border: 1px solid #d0d7de;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #656d76;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.clear-button:hover {
+  background: #f3f4f6;
+  border-color: #8c959f;
+  color: #24292f;
+}
+
+.toggle-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: #656d76;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.toggle-button:hover {
+  color: #24292f;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.console-messages {
+  max-height: 240px;
+  overflow-y: auto;
+  padding: 8px 0;
+}
+
+.empty-console {
+  padding: 20px;
+  text-align: center;
+  color: #656d76;
+  font-size: 13px;
+  font-style: italic;
+}
+
+.console-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 16px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  border-left: 3px solid transparent;
+}
+
+.console-message:hover {
+  background: #f8f9fa;
+}
+
+.console-message.log {
+  border-left-color: #0969da;
+}
+
+.console-message.error {
+  border-left-color: #d1242f;
+  background: #fff5f5;
+}
+
+.console-message.error:hover {
+  background: #ffebee;
+}
+
+.console-message.warn {
+  border-left-color: #fb8500;
+  background: #fffbf0;
+}
+
+.console-message.warn:hover {
+  background: #fff8e1;
+}
+
+.console-message.info {
+  border-left-color: #0969da;
+  background: #f0f8ff;
+}
+
+.console-message.info:hover {
+  background: #e6f3ff;
+}
+
+.message-icon {
+  flex-shrink: 0;
+  font-size: 12px;
+  margin-top: 1px;
+}
+
+.message-timestamp {
+  flex-shrink: 0;
+  color: #656d76;
+  font-size: 10px;
+  margin-top: 1px;
+  min-width: 80px;
+}
+
+.message-text {
+  flex: 1;
+  color: #24292f;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.console-message.error .message-text {
+  color: #d1242f;
+}
+
+.console-message.warn .message-text {
+  color: #fb8500;
+}
+
+.console-message.info .message-text {
+  color: #0969da;
+}
+
+/* Custom scrollbar for console messages */
+.console-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.console-messages::-webkit-scrollbar-track {
+  background: #f1f3f4;
+}
+
+.console-messages::-webkit-scrollbar-thumb {
+  background: #c1c8cd;
+  border-radius: 3px;
+}
+
+.console-messages::-webkit-scrollbar-thumb:hover {
+  background: #8c959f;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .console-header {
+    padding: 8px 12px;
+  }
+  
+  .console-title {
+    font-size: 13px;
+  }
+  
+  .message-count {
+    font-size: 11px;
+  }
+  
+  .console-message {
+    padding: 4px 12px;
+    font-size: 11px;
+  }
+  
+  .message-timestamp {
+    min-width: 70px;
+    font-size: 9px;
+  }
+}

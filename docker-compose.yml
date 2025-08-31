@@ -1,0 +1,126 @@
+version: '3.8'
+
+services:
+  # MySQL Database for payment system
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-codeeditor_db}
+      MYSQL_USER: ${MYSQL_USER:-codeeditor}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-codeeditor_password}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database_schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "${MYSQL_USER:-codeeditor}", "-p${MYSQL_PASSWORD:-codeeditor_password}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis for session storage and caching (optional)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Main application with payment system
+  app:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      # Flask Configuration
+      - FLASK_ENV=production
+      - SECRET_KEY=${SECRET_KEY:-your-super-secret-key-change-in-production}
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost:5000}
+      - SESSION_COOKIE_SECURE=${SESSION_COOKIE_SECURE:-false}
+      
+      # Database Configuration
+      - DATABASE_URL=mysql+pymysql://${MYSQL_USER:-codeeditor}:${MYSQL_PASSWORD:-codeeditor_password}@db:3306/${MYSQL_DATABASE:-codeeditor_db}
+      
+      # JWT Configuration
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-jwt-secret-key-change-in-production}
+      - JWT_ACCESS_TOKEN_EXPIRES=${JWT_ACCESS_TOKEN_EXPIRES:-3600}
+      - JWT_REFRESH_TOKEN_EXPIRES=${JWT_REFRESH_TOKEN_EXPIRES:-604800}
+      
+      # Payment Gateway Configuration
+      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
+      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
+      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
+      - RAZORPAY_KEY_ID=${RAZORPAY_KEY_ID}
+      - RAZORPAY_KEY_SECRET=${RAZORPAY_KEY_SECRET}
+      
+      # Redis Configuration
+      - REDIS_URL=redis://redis:6379/0
+      
+      # Application Configuration
+      - APP_NAME=Multi-Language Code Editor
+      - APP_URL=${APP_URL:-http://localhost:5000}
+      - FRONTEND_URL=${FRONTEND_URL:-http://localhost:5000}
+      
+      # Feature Flags
+      - ENABLE_REGISTRATION=${ENABLE_REGISTRATION:-true}
+      - ENABLE_EMAIL_VERIFICATION=${ENABLE_EMAIL_VERIFICATION:-false}
+      - ENABLE_ADMIN_PANEL=${ENABLE_ADMIN_PANEL:-true}
+      - INIT_DEFAULT_DATA=${INIT_DEFAULT_DATA:-true}
+      
+      # AI Configuration (existing)
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - TOGETHER_API_KEY=${TOGETHER_API_KEY}
+    
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    
+    restart: unless-stopped
+    volumes:
+      - app_logs:/app/logs
+      - app_uploads:/app/uploads
+    
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETUID
+      - SETGID
+    
+    # Reduced read-only restrictions for payment system database operations
+    tmpfs:
+      - /tmp:exec,nosuid,size=200m
+      - /home/appuser/.cache:exec,nosuid,size=100m
+      - /home/appuser/.local:exec,nosuid,size=200m
+      - /home/appuser/.dotnet:exec,nosuid,size=150m
+      - /home/appuser/.nuget:exec,nosuid,size=100m
+      - /home/appuser/.R:exec,nosuid,size=100m
+      - /home/appuser/.config:exec,nosuid,size=50m
+
+# Volumes for persistent data
+volumes:
+  mysql_data:
+    driver: local
+  app_logs:
+    driver: local
+  app_uploads:
+    driver: local

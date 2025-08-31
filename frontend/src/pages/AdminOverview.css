@@ -1,0 +1,339 @@
+.admin-overview-container {
+  padding: 32px;
+  background: linear-gradient(135deg, #f9f9fb 0%, #f0f9ff 100%);
+  min-height: 100vh;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Enhanced Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.admin-overview-container h2 {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: slideInLeft 0.8s ease-out 0.2s both;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.overview-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  animation: scaleIn 0.8s ease-out 0.4s both;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 24px;
+  min-width: 240px;
+  flex: 1;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.6s ease-out;
+  border: 1px solid #e5e7eb;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.1),
+    transparent
+  );
+  transition: left 0.6s;
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border-color: #3b82f6;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #2d3a4a;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.card h3::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  transition: width 0.3s ease;
+}
+
+.card:hover h3::after {
+  width: 100%;
+}
+
+.error-message {
+  color: #c00;
+  margin-bottom: 16px;
+  background: #fee2e2;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+  animation: slideInRight 0.5s ease-out;
+  position: relative;
+  overflow: hidden;
+}
+
+.error-message::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+.timestamp {
+  color: #888;
+  font-size: 0.9em;
+  margin-left: 8px;
+}
+/* Enhanced List Animations */
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f3f4f6;
+  transition: all 0.3s ease;
+  animation: slideInLeft 0.4s ease-out;
+  animation-fill-mode: both;
+  position: relative;
+}
+
+.card li:nth-child(1) { animation-delay: 0.1s; }
+.card li:nth-child(2) { animation-delay: 0.2s; }
+.card li:nth-child(3) { animation-delay: 0.3s; }
+.card li:nth-child(4) { animation-delay: 0.4s; }
+.card li:nth-child(5) { animation-delay: 0.5s; }
+
+.card li:hover {
+  background: linear-gradient(135deg, #f8fafc, #f0f9ff);
+  padding-left: 1rem;
+  border-radius: 6px;
+  transform: translateX(5px);
+}
+
+.card li:last-child {
+  border-bottom: none;
+}
+
+/* Enhanced Timestamp Styling */
+.timestamp {
+  color: #888;
+  font-size: 0.9em;
+  margin-left: 8px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.timestamp::before {
+  content: '🕒';
+  margin-right: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card li:hover .timestamp::before {
+  opacity: 1;
+}
+
+.card li:hover .timestamp {
+  color: #3b82f6;
+  font-weight: 500;
+}
+
+/* Loading Animation */
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+  height: 1rem;
+  margin: 0.5rem 0;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .admin-overview-container {
+    padding: 16px;
+  }
+  
+  .overview-cards {
+    flex-direction: column;
+  }
+  
+  .card {
+    animation: slideInLeft 0.6s ease-out;
+  }
+  
+  .card:nth-child(even) {
+    animation: slideInRight 0.6s ease-out;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+}
+
+/* Enhanced Card Variants */
+.card.plan-distribution {
+  border-left: 4px solid #3b82f6;
+}
+
+.card.payment-methods {
+  border-left: 4px solid #10b981;
+}
+
+.card.subscription-status {
+  border-left: 4px solid #f59e0b;
+}
+
+.card.recent-activity {
+  border-left: 4px solid #8b5cf6;
+}
+
+/* Pulse Animation for Important Items */
+.card.recent-activity li:first-child {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Enhanced Hover Effects for Different Card Types */
+.card.plan-distribution:hover {
+  box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+}
+
+.card.payment-methods:hover {
+  box-shadow: 0 20px 40px rgba(16, 185, 129, 0.15);
+}
+
+.card.subscription-status:hover {
+  box-shadow: 0 20px 40px rgba(245, 158, 11, 0.15);
+}
+
+.card.recent-activity:hover {
+  box-shadow: 0 20px 40px rgba(139, 92, 246, 0.15);
+}
+
+/* Floating Animation for Cards */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.card:nth-child(2n) {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.card:nth-child(2n+1) {
+  animation: float 6s ease-in-out infinite;
+  animation-delay: 3s;
+}

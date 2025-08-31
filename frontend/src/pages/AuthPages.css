@@ -1,0 +1,250 @@
+/* Ultra Minimal One-Line Auth Design */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* One-Line Auth Page */
+.simple-auth-page {
+  min-height: 100vh;
+  background: #2d3748;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-family: 'Courier New', monospace;
+}
+
+.simple-auth-container {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.simple-auth-card {
+  background: #1a202c;
+  border: 2px solid #4a5568;
+  padding: 30px;
+  border-radius: 0;
+}
+
+/* Inline Header Text */
+.simple-header-text {
+  color: #63b3ed;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  min-width: 80px;
+}
+
+/* One-Line Form */
+.simple-auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.simple-form-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 100%;
+}
+
+/* All inputs in one line */
+.simple-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #4a5568;
+  background: #2d3748;
+  color: #e2e8f0;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.simple-input:focus {
+  border-color: #63b3ed;
+}
+
+.simple-input::placeholder {
+  color: #718096;
+  font-style: italic;
+}
+
+/* Password wrapper */
+.simple-password-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.simple-password-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #a0aec0;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px;
+}
+
+.simple-password-toggle:hover {
+  color: #e2e8f0;
+}
+
+/* Submit button */
+.simple-submit-btn {
+  background: #4a5568;
+  color: #e2e8f0;
+  border: 1px solid #63b3ed;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 120px;
+}
+
+.simple-submit-btn:hover:not(:disabled) {
+  background: #63b3ed;
+  color: #1a202c;
+}
+
+.simple-submit-btn:disabled {
+  background: #2d3748;
+  color: #718096;
+  cursor: not-allowed;
+}
+
+/* Checkbox */
+.simple-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #a0aec0;
+  cursor: pointer;
+}
+
+.simple-checkbox input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  accent-color: #63b3ed;
+}
+
+/* Form options in one line */
+.simple-form-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+
+/* Links */
+.simple-link {
+  color: #63b3ed;
+  text-decoration: none;
+  font-weight: normal;
+}
+
+.simple-link:hover {
+  text-decoration: underline;
+}
+
+/* Error message */
+.simple-error-message {
+  background: #742a2a;
+  border: 1px solid #e53e3e;
+  color: #fed7d7;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-family: 'Courier New', monospace;
+}
+
+/* No divider - remove social buttons section */
+.simple-divider {
+  display: none;
+}
+
+.simple-social-row {
+  display: none;
+}
+
+/* Footer */
+.simple-auth-footer {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.simple-auth-footer p {
+  color: #718096;
+  font-size: 12px;
+  margin: 0;
+}
+
+/* Responsive - keep one line even on mobile */
+@media (max-width: 768px) {
+  .simple-auth-page {
+    padding: 10px;
+  }
+  
+  .simple-auth-card {
+    padding: 20px;
+  }
+  
+  .simple-form-row {
+    gap: 8px;
+  }
+  
+  .simple-input {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  
+  .simple-submit-btn {
+    padding: 6px 16px;
+    font-size: 13px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .simple-form-row {
+    flex-wrap: wrap;
+  }
+  
+  .simple-input {
+    min-width: 120px;
+  }
+  
+  .simple-submit-btn {
+    width: 100%;
+    margin-top: 5px;
+  }
+  
+  .simple-form-options {
+    flex-direction: column;
+    gap: 8px;
+    align-items: flex-start;
+  }
+}
+
+/* Focus styles */
+.simple-input:focus,
+.simple-submit-btn:focus,
+.simple-password-toggle:focus {
+  outline: 1px solid #63b3ed;
+  outline-offset: 1px;
+}
