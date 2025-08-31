@@ -27,34 +27,46 @@ FROM python:3.11-slim AS backend
 
 # Install system dependencies for code execution and database
 # Supports: Python, JavaScript/Node.js, Java, C, C++, C#/.NET, PHP, Ruby, Go, Rust, R, TypeScript, HTML, CSS
-# Enhanced MySQL support and optimized package installation
+# Split installation for better error handling and caching
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    wget \
+    git \
+    ca-certificates \
+    pkg-config \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install build tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     g++ \
     clang \
     libc6-dev \
+    build-essential \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install programming language runtimes
+RUN apt-get update && apt-get install -y --no-install-recommends \
     default-jdk \
     nodejs \
     npm \
     php \
     ruby \
     golang-go \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install R and MySQL client
+RUN apt-get update && apt-get install -y --no-install-recommends \
     r-base \
     r-base-dev \
     r-recommended \
-    curl \
-    wget \
-    build-essential \
     default-mysql-client \
-    libmysqlclient-dev \
-    mysql-client \
-    pkg-config \
-    git \
-    ca-certificates \
+    libmariadb-dev-compat \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
-    && rm -rf /tmp/* \
-    && rm -rf /var/tmp/*
+    && rm -rf /var/lib/apt/lists/*
 
 # Install .NET SDK (optimized)
 RUN curl -sSL https://dot.net/v1/dotnet-install.sh | bash /dev/stdin --channel 6.0 --install-dir /usr/share/dotnet && \
